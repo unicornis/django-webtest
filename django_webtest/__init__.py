@@ -103,10 +103,10 @@ class DjangoTestApp(TestApp):
 
     def get(self, url, params=None, headers=None, extra_environ=None,
             status=None, expect_errors=False, user=None, auto_follow=False,
-            content_type=None):
+            content_type=None, xhr=False):
         extra_environ = self._update_environ(extra_environ, user)
         response = super(DjangoTestApp, self).get(
-                  url, params, headers, extra_environ, status, expect_errors)
+                  url, params, headers, extra_environ, status, expect_errors, xhr)
 
         is_redirect = lambda r: r.status_int >= 300 and r.status_int < 400
         while auto_follow and is_redirect(response):
@@ -116,27 +116,27 @@ class DjangoTestApp(TestApp):
 
     def post(self, url, params='', headers=None, extra_environ=None,
              status=None, upload_files=None, expect_errors=False,
-             content_type=None, user=None):
+             content_type=None, user=None, xhr=False):
         extra_environ = self._update_environ(extra_environ, user)
         return super(DjangoTestApp, self).post(
                    url, params, headers, extra_environ, status,
-                   upload_files, expect_errors, content_type)
+                   upload_files, expect_errors, content_type, xhr)
 
     def put(self, url, params='', headers=None, extra_environ=None,
              status=None, upload_files=None, expect_errors=False,
-             content_type=None, user=None):
+             content_type=None, user=None, xhr=False):
         extra_environ = self._update_environ(extra_environ, user)
         return super(DjangoTestApp, self).put(
                    url, params, headers, extra_environ, status,
-                   upload_files, expect_errors, content_type)
+                   upload_files, expect_errors, content_type, xhr)
 
     def delete(self, url, params='', headers=None, extra_environ=None,
              status=None, expect_errors=False,
-             content_type=None, user=None):
+             content_type=None, user=None, xhr=False):
         extra_environ = self._update_environ(extra_environ, user)
         return super(DjangoTestApp, self).delete(
                    url, params, headers, extra_environ, status,
-                   expect_errors, content_type)
+                   expect_errors, content_type, xhr)
 
     @property
     def session(self):
