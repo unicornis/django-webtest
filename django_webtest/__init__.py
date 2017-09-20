@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
+from importlib import import_module
+
 from django.conf import settings
 from django.test.signals import template_rendered
 from django.core.handlers.wsgi import WSGIHandler
 from django.test import TestCase
 from django.test.client import store_rendered_templates
 from django.utils.functional import curry
-from django.utils.importlib import import_module
 from django.core import signals
 try:
     from django.db import close_old_connections
