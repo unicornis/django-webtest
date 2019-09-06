@@ -11,7 +11,7 @@ if PY3:
     def to_string(s):
         if isinstance(s, str):
             return s
-        return str(s, 'latin1')
+        return str(s)
 
     def to_wsgi_safe_string(s):
         return urlparse.quote(to_string(s))
