@@ -2,6 +2,165 @@
 CHANGES
 =======
 
+1.9.8 (unreleased)
+------------------
+
+- Nothing changed yet.
+
+
+1.9.7 (2019-07-05)
+------------------
+
+- allow overriding HTTP_HOST with DjangoTestApp.__init__. Fixed #102
+
+
+1.9.6 (2019-06-07)
+------------------
+
+- rest_framework auth class. Fixed #98 #100
+
+
+1.9.5 (2019-05-31)
+------------------
+
+- Fix compatibility with django 3. See #96
+
+- Add integration with django-rest-framework auth
+
+- Add missing args to DjangoTestApp. Fixed #86
+
+1.9.4 (2018-10-27)
+------------------
+
+- py34 and Django 1.8 are no longer tested (but may works)
+
+- allow to use positionnal args; fixed #89
+
+- remove deprecated pytest.yield_fixture functions. use pytest.fixture instead;
+  fixed #88
+
+- Don't add duplicate WebtestUserMiddleware to the list of middlewares in
+  WebTestMixin. fixed #87
+
+- restore MIDDLEWARE_CLASSES support; fixed #84
+
+1.9.3 (2018-05-03)
+------------------
+
+- Passing `user=None` to get/post/etc. methods will clear a user
+  previously set with `set_user` instead of doing nothing.
+
+- Avoid sharing settings between tests in pytest plugin
+
+- Fix middleware settings name used
+
+
+1.9.2 (2017-05-17)
+------------------
+
+- silence warnings about is_authenticated on 1.11
+
+- include correct hostname (testserver) when using set_cookie
+
+
+1.9.1 (2017-03-09)
+------------------
+
+- Fix package description (multiline are no longer allowed by pypi)
+
+
+1.9.0 (2017-03-09)
+------------------
+
+- Backward incompatibility: positionnal arguments are no longer supported.
+  You'll need to replace them by keywords arguments.
+
+- Added support for Django 1.11
+
+- Dropped support for Django <= 1.7
+
+- Dropped support for Python 2.6
+
+- Changed value of `HTTP_HOST` header from `localhost` to `testserver`, to
+  match behaviour of Django test client.
+
+- Fixed `DjangoTestApp.options`
+
+- Added `DjangoTestApp.head`
+
+- Added pytest fixtures
+
+
+1.8.0 (2016-09-14)
+------------------
+
+- Fixed issue #40 - combining ``app.get`` ``auto_follow=True`` with other
+  keyword args.
+
+- Add compatibility to the MIDDLEWARE setting introduced in django 1.10
+
+- Drop support for django 1.2
+
+1.7.9 (2016-04-19)
+------------------
+
+- Add set_user() to allow to set a user globally for the app
+
+- Allow 'click' to be given a user param
+
+- Mention testapp.reset() in readme
+
+- Allow to use ``json_`` methods
+
+1.7.8 (2015-04-21)
+------------------
+
+- setup.py is switched to setuptools; WebTest is now installed automatically
+  (thanks Eric Araujo);
+- importlib from stdlib is used when available, for django 1.9 compatibility
+  (thanks Helen Sherwood-Taylor);
+- django-webtest's own tests are fixed to work in django 1.6+;
+- https://bitbucket.org/kmike/django-webtest repository is no longer supported.
+
+1.7.7 (2014-03-25)
+------------------
+
+- Fix installation for Python 3.x on systems with C locales.
+
+1.7.6 (2014-01-20)
+------------------
+
+- DjangoTestApp methods pass all custom keyword arguments to webtest.TestApp;
+  this allows to use ``xhr=True`` feature (thanks Max Kharandziuk).
+- Travis CI testing fixes (thanks Darian Moody).
+
+1.7.5 (2013-07-17)
+------------------
+
+- OPTIONS method is fixed;
+- added workaround for DELETE method warnings
+  (see https://github.com/Pylons/webtest/issues/50).
+
+1.7.4 (2013-07-14)
+------------------
+
+- Really add ``TransactionWebTest`` base class (thanks Julien Aubert).
+
+1.7.3 (2013-07-07)
+------------------
+
+- Added support for PATCH and OPTIONS HTTP methods (thanks Will Bradley).
+
+1.7.2 (2013-06-27)
+------------------
+
+- ``TransactionWebTest`` base class is added (thanks Iurii Kriachko).
+
+1.7.1 (2013-06-11)
+------------------
+
+- Added support for non-ascii usernames.
+
 1.7 (2013-05-23)
 ----------------
 

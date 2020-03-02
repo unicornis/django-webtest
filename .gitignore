@@ -1,0 +1,7 @@
+*.pyc
+__pycache__
+.tox/
+MANIFEST
+build/
+dist/
+django_webtest.egg-info

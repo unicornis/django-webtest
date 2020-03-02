@@ -1,7 +1,15 @@
 # -*- coding: utf-8 -*-
+import django
 from django.contrib.auth.middleware import RemoteUserMiddleware
 from django.core.exceptions import ImproperlyConfigured
 from django.contrib import auth
+if django.VERSION >= (1, 10):
+    from django.utils.deprecation import MiddlewareMixin
+else:
+    MiddlewareMixin = object
+
+from django_webtest.compat import is_authenticated
+
 
 class WebtestUserMiddleware(RemoteUserMiddleware):
     """
@@ -36,12 +44,13 @@ class WebtestUserMiddleware(RemoteUserMiddleware):
         # If the user is already authenticated and that user is the user we are
         # getting passed in the headers, then the correct user is already
         # persisted in the session and we don't need to continue.
-        if request.user.is_authenticated():
+        if is_authenticated(request.user):
             if hasattr(request.user, "get_username"):
                 authenticated_username = request.user.get_username()
             else:
                 authenticated_username = request.user.username
-            if authenticated_username == self.clean_username(username, request):
+            clean_username = self.clean_username(username, request)
+            if authenticated_username == clean_username:
                 return
         # We are seeing this user for the first time in this session, attempt
         # to authenticate the user.
@@ -53,6 +62,6 @@ class WebtestUserMiddleware(RemoteUserMiddleware):
             auth.login(request, user)
 
 
-class DisableCSRFCheckMiddleware(object):
+class DisableCSRFCheckMiddleware(MiddlewareMixin):
     def process_request(self, request):
         request._dont_enforce_csrf_checks = True

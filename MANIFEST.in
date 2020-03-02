@@ -1,3 +1,5 @@
 include *.txt
 include *.rst
-recursive-include docs *.txt
+include *.ini
+recursive-include django_webtest_tests *.html
+recursive-include django_webtest_tests *.py
